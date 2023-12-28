@@ -1,62 +1,30 @@
 #import <Foundation/Foundation.h>
+#import "variant1.h"
+#import "variant2.h"
 
-// Протокол делегата для взаимодействия между доктором и пациентом
-@protocol PatientDelegate <NSObject>
 
-- (void)patientTakePill; // Метод, вызываемый пациентом для выполнения действия "выпить пилюлю"
-
-@end
-
-// Класс Doctor (Доктор)
-@interface Doctor : NSObject
-
-@property (nonatomic, weak) id<PatientDelegate> delegate; // Делегат пациента
-
-// * Cвойство delegate объявлено с модификатором weak. Это означает, что связь между доктором и пациентом является слабой ссылкой, и нет циклической зависимости между ними.
-
-- (void)prescribeMedicine; // Метод, вызываемый доктором для назначения лекарства
-
-@end
-
-@implementation Doctor
-
-- (void)prescribeMedicine {
-    // Назначение лекарства
-    NSLog(@"Доктор: Назначено лекарство, выпейте пилюлю.");
-    
-    // Уведомление пациента о необходимости выпить пилюлю
-    if ([self.delegate respondsToSelector:@selector(patientTakePill)]) {
-        [self.delegate patientTakePill];
-    }
-}
-
-@end
-
-// Класс Patient (Пациент)
-@interface Patient : NSObject <PatientDelegate>
-
-@end
-
-@implementation Patient
-
-- (void)patientTakePill {
-    // Выпить пилюлю
-    NSLog(@"Пациент: Пью пилюлю.");
-}
-
-@end
 
 int main(int argc, const char * argv[]) {
     @autoreleasepool {
         // Создание экземпляров доктора и пациента
-        Doctor *doctor = [[Doctor alloc] init];
-        Patient *patient = [[Patient alloc] init];
+        Doctor1 *doctor1 = [[Doctor1 alloc] init];
+        Patient1 *patient1 = [[Patient1 alloc] init];
         
         // Установка пациента в качестве делегата доктора
-        doctor.delegate = patient;
+        doctor1.delegate = patient1;
         
         // Доктор назначает лекарство
-        [doctor prescribeMedicine];
+        [doctor1 prescribeMedicine];
+        
+        //  Вариант 2, пациент сам приходит за назначением
+        // Создаем доктора и пациента
+        Doctor2 *doctor = [[Doctor2 alloc] init];
+        Patient2 *patient = [[Patient2 alloc] init];
+        
+        // Пациент запрашивает у доктора лекарство
+        [patient requestMedicineFromDoctor:doctor];
+        
+        
     }
     return 0;
 }
