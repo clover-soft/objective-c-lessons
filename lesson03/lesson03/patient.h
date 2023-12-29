@@ -1,6 +1,5 @@
 #ifndef patient_h
 #define patient_h
-#import "doctor.h"
 
 // Класс Patient2, который будет выпивать пилюлю
 @interface Patient : NSObject <DoctorDelegate>
