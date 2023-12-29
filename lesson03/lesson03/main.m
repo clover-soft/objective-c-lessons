@@ -1,30 +1,20 @@
 #import <Foundation/Foundation.h>
-#import "variant1.h"
-#import "variant2.h"
-
-
+#import "doctor.h"
+#import "patient.h"
 
 int main(int argc, const char * argv[]) {
     @autoreleasepool {
-        // Создание экземпляров доктора и пациента
-        Doctor1 *doctor1 = [[Doctor1 alloc] init];
-        Patient1 *patient1 = [[Patient1 alloc] init];
-        
-        // Установка пациента в качестве делегата доктора
-        doctor1.delegate = patient1;
-        
-        // Доктор назначает лекарство
-        [doctor1 prescribeMedicine];
-        
-        //  Вариант 2, пациент сам приходит за назначением
-        // Создаем доктора и пациента
-        Doctor2 *doctor = [[Doctor2 alloc] init];
-        Patient2 *patient = [[Patient2 alloc] init];
-        
-        // Пациент запрашивает у доктора лекарство
-        [patient requestMedicineFromDoctor:doctor];
-        
-        
+        // Создаем доктора и пациентов
+        Doctor *doctor = [[Doctor alloc] init];
+        Patient *patient1 = [[Patient alloc] init];
+        Patient *patient2 = [[Patient alloc] init];
+        // ... можно создать ещё пациентов
+
+        // Пациенты подписываются под делегат доктора и выполняют его указания
+        [patient1 registerWithDoctor:doctor];
+        [patient2 registerWithDoctor:doctor];
+        // ... каждый пациент подписывается отдельно
+
     }
     return 0;
 }
