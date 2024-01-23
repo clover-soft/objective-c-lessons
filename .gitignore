@@ -56,3 +56,17 @@ Package.resolved
 
 # Ignore the Xcode Playgrounds folder
 *.playground
+
+# Objective-C/Swift specific
+##
+*.hmap
+*.ipa
+
+# CocoaPods
+##
+Pods/
+
+# OS X
+.DS_Store
+.AppleDouble
+.LSOverride
